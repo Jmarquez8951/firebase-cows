@@ -6,7 +6,21 @@
   <title>Firebase Cows</title>
 </head>
 <body>
-  <button class="btn btn-primary">click</button>
-  
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Cows</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active mr-auto">
+          <button id="navbar-logout-button" class="nav-link btn btn-primary" href="#">Logout <span class="sr-only">(current)</span></button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="auth"></div>
+  <div id="pasture" class="hide">I SEE COWS</div>
 </body>
 </html>
