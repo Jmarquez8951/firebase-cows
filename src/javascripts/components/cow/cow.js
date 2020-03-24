@@ -5,7 +5,7 @@ const cowMaker = (cow) => {
   domString += `<div class="card-header">${cow.name}</div>`;
   domString += '<div class="card-body">';
   domString += `<h5 class="card-title">${cow.breed}</h5>`;
-  domString += `<p class="card-text">Weight: ${cow.location}</p>`;
+  domString += `<p class="card-text">Location: ${cow.location}</p>`;
   domString += `<p class="card-text">Weight: ${cow.weight}</p>`;
   domString += '</div>';
   domString += '</div>';
