@@ -7,6 +7,7 @@ import farmHouse from '../../components/farmHouse/farmHouse';
 const authDiv = $('#auth');
 const pastureDiv = $('#pasture');
 const farmHouseDiv = $('#farmHouse');
+const singleFarmerDiv = $('#single-farmer');
 const logOutButton = $('#navbar-logout-button');
 
 const checkLoginStatus = () => {
@@ -17,6 +18,7 @@ const checkLoginStatus = () => {
       pastureDiv.removeClass('hide');
       farmHouseDiv.removeClass('hide');
       logOutButton.removeClass('hide');
+      singleFarmerDiv.removeClass('hide');
       pasture.buildCows();
       farmHouse.buildFarmHouse();
     } else {
@@ -24,6 +26,7 @@ const checkLoginStatus = () => {
       authDiv.removeClass('hide');
       pastureDiv.addClass('hide');
       farmHouseDiv.addClass('hide');
+      singleFarmerDiv.addClass('hide');
       logOutButton.addClass('hide');
     }
   });
