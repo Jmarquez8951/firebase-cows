@@ -18,7 +18,7 @@ const getFarmerCowsByFarmerUid = (uid) => new Promise((resolve, reject) => {
 });
 
 const getFarmerCowsByCowId = (cowId) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/farmerCows.json?orderBy="farmerUid"&equalTo="${cowId}"`)
+  axios.get(`${baseUrl}/farmerCows.json?orderBy="cowId"&equalTo="${cowId}"`)
     .then((response) => {
       const demFarmerCows = response.data;
       const farmerCows = [];
