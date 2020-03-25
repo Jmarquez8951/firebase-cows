@@ -12,7 +12,10 @@ const buildFarmer = (e) => {
       domString += '<div class="card text-white bg-dark mb-3">';
       domString += `<div class="card-header">${singleFarmer.name} (age: ${singleFarmer.age})</div>`;
       domString += '<div class="card-body">';
-      domString += '<p></p>';
+      domString += '<h3 class="card-title">Cow(s) Owned:</h3>';
+      singleFarmer.cows.forEach((cow) => {
+        domString += `<p class="card-text">${cow.name} (${cow.location})</p>`;
+      });
       domString += '</div>';
       domString += '</div>';
 
