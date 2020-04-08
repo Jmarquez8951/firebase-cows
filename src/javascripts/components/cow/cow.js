@@ -12,7 +12,7 @@ const cowMaker = (cow) => {
   domString += '<form>';
   cow.farmers.forEach((farmer) => {
     domString += '<div class="form-group form-check">';
-    domString += `<input type="checkbox" class="form-check-input farmer-cow-checkbox" data-farmer-uid="${farmer.uid}" id="exampleCheck1" ${farmer.isChecked ? 'checked' : ''}>`;
+    domString += `<input type="checkbox" class="form-check-input farmer-cow-checkbox" data-farmer-uid="${farmer.uid}" id="${farmer.farmerCowId}" ${farmer.isChecked ? 'checked' : ''}>`;
     domString += `<label class="form-check-label" for="exampleCheck1">${farmer.name}</label>`;
     domString += '</div>';
   });

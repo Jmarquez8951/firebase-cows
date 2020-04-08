@@ -53,8 +53,17 @@ const farmerCowController = (e) => {
         util.printToDom('new-cow', '');
         util.printToDom('single-farmer', '');
       })
-      .catch((err) => console.error(err));
-    // } else {
+      .catch((err) => console.error('could not create farmer cow', err));
+  } else {
+    const farmerCowId = e.target.id;
+    farmerCowData.deleteFarmerCow(farmerCowId)
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        buildCows();
+        util.printToDom('new-cow', '');
+        util.printToDom('single-farmer', '');
+      })
+      .catch((err) => console.error('could not delete farmer cow', err));
   }
 };
 
@@ -70,12 +79,15 @@ const buildCows = () => {
       });
       domString += '</div>';
       util.printToDom('pasture', domString);
-      $('body').on('click', '.delete-cow', removeCow);
-      $('body').on('click', '#cow-creator', makeACow);
-      $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
       $('#show-add-cow-form').click(newCowComponent.showForm);
     })
     .catch((err) => console.error('getCows broke', err));
 };
 
-export default { buildCows };
+const pastureEvents = () => {
+  $('body').on('click', '.delete-cow', removeCow);
+  $('body').on('click', '#cow-creator', makeACow);
+  $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
+};
+
+export default { buildCows, pastureEvents };
