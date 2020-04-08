@@ -3,6 +3,7 @@ import util from '../../helpers/util';
 import cowComponent from '../cow/cow';
 import smashData from '../../helpers/data/smash';
 import newCowComponent from '../newCow/newCow';
+import farmerCowData from '../../helpers/data/farmerCowData';
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
@@ -38,6 +39,25 @@ const makeACow = (e) => {
   console.error('newCow', newCow);
 };
 
+const farmerCowController = (e) => {
+  e.preventDefault();
+  if (e.target.checked) {
+    const newFarmerCow = {
+      cowId: e.target.closest('.card').id,
+      farmerUid: e.target.dataset.farmerUid,
+    };
+    farmerCowData.addFarmerCow(newFarmerCow)
+      .then(() => {
+        // eslint-disable-next-line no-use-before-define
+        buildCows();
+        util.printToDom('new-cow', '');
+        util.printToDom('single-farmer', '');
+      })
+      .catch((err) => console.error(err));
+    // } else {
+  }
+};
+
 const buildCows = () => {
   smashData.getCowsWithOwners()
     .then((cows) => {
@@ -52,6 +72,7 @@ const buildCows = () => {
       util.printToDom('pasture', domString);
       $('body').on('click', '.delete-cow', removeCow);
       $('body').on('click', '#cow-creator', makeACow);
+      $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
       $('#show-add-cow-form').click(newCowComponent.showForm);
     })
     .catch((err) => console.error('getCows broke', err));
