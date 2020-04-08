@@ -16,6 +16,28 @@ const removeCow = (e) => {
     .catch((err) => console.error('could not delete cow', err));
 };
 
+const makeACow = (e) => {
+  e.preventDefault();
+  // Create new cow object
+  const newCow = {
+    name: $('#cow-name').val(),
+    breed: $('#cow-breed').val(),
+    location: $('#cow-location').val(),
+    weight: $('#cow-weight').val() * 1,
+  };
+  // save to firebase
+  cowData.addCow(newCow)
+    .then(() => {
+      // reprint cows
+      // eslint-disable-next-line no-use-before-define
+      buildCows();
+      util.printToDom('new-cow', '');
+    })
+    .catch((err) => console.error(err));
+
+  console.error('newCow', newCow);
+};
+
 const buildCows = () => {
   cowData.getCows()
     .then((cows) => {
@@ -29,6 +51,7 @@ const buildCows = () => {
       domString += '</div>';
       util.printToDom('pasture', domString);
       $('body').on('click', '.delete-cow', removeCow);
+      $('body').on('click', '#cow-creator', makeACow);
       $('#show-add-cow-form').click(newCowComponent.showForm);
     })
     .catch((err) => console.error('getCows broke', err));
