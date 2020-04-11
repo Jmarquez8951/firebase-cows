@@ -46,6 +46,25 @@ const makeACow = (e) => {
   console.error('newCow', newCow);
 };
 
+const modifyCow = (e) => {
+  e.preventDefault();
+  const cowId = e.target.closest('.edit-cow-form-tag').id;
+  const modifiedCow = {
+    name: $('#edit-cow-name').val(),
+    breed: $('#edit-cow-breed').val(),
+    location: $('#edit-cow-location').val(),
+    weight: $('#edit-cow-weight').val() * 1,
+  };
+  cowData.updateCow(cowId, modifiedCow)
+    .then(() => {
+      // reprint cows
+      // eslint-disable-next-line no-use-before-define
+      buildCows();
+      util.printToDom('edit-cow', '');
+    })
+    .catch((err) => console.error(err));
+};
+
 const farmerCowController = (e) => {
   e.preventDefault();
   if (e.target.checked) {
@@ -95,6 +114,7 @@ const pastureEvents = () => {
   $('body').on('click', '.delete-cow', removeCow);
   $('body').on('click', '.edit-cow', editCowEvent);
   $('body').on('click', '#cow-creator', makeACow);
+  $('body').on('click', '#cow-modifier', modifyCow);
   $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
 };
 

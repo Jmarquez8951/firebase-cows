@@ -26,9 +26,12 @@ const deleteCow = (cowId) => axios.delete(`${baseUrl}/cows/${cowId}.json`);
 
 const addCow = (newCow) => axios.post(`${baseUrl}/cows.json`, newCow);
 
+const updateCow = (cowId, modifiedCow) => axios.put(`${baseUrl}/cows/${cowId}.json`, modifiedCow);
+
 export default {
   getCows,
   deleteCow,
   addCow,
   getSingleCow,
+  updateCow,
 };
