@@ -4,6 +4,7 @@ import cowComponent from '../cow/cow';
 import smashData from '../../helpers/data/smash';
 import newCowComponent from '../newCow/newCow';
 import farmerCowData from '../../helpers/data/farmerCowData';
+import editCow from '../editCow/editCow';
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
@@ -15,6 +16,12 @@ const removeCow = (e) => {
       util.printToDom('single-farmer', '');
     })
     .catch((err) => console.error('could not delete cow', err));
+};
+
+const editCowEvent = (e) => {
+  e.preventDefault();
+  const cowId = e.target.closest('.card').id;
+  editCow.showForm(cowId);
 };
 
 const makeACow = (e) => {
@@ -86,6 +93,7 @@ const buildCows = () => {
 
 const pastureEvents = () => {
   $('body').on('click', '.delete-cow', removeCow);
+  $('body').on('click', '.edit-cow', editCowEvent);
   $('body').on('click', '#cow-creator', makeACow);
   $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
 };
