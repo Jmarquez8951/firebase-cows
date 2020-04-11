@@ -4,6 +4,7 @@ import cowComponent from '../cow/cow';
 import smashData from '../../helpers/data/smash';
 import newCowComponent from '../newCow/newCow';
 import farmerCowData from '../../helpers/data/farmerCowData';
+import editCow from '../editCow/editCow';
 
 const removeCow = (e) => {
   const cowId = e.target.closest('.card').id;
@@ -15,6 +16,12 @@ const removeCow = (e) => {
       util.printToDom('single-farmer', '');
     })
     .catch((err) => console.error('could not delete cow', err));
+};
+
+const editCowEvent = (e) => {
+  e.preventDefault();
+  const cowId = e.target.closest('.card').id;
+  editCow.showForm(cowId);
 };
 
 const makeACow = (e) => {
@@ -37,6 +44,25 @@ const makeACow = (e) => {
     .catch((err) => console.error(err));
 
   console.error('newCow', newCow);
+};
+
+const modifyCow = (e) => {
+  e.preventDefault();
+  const cowId = e.target.closest('.edit-cow-form-tag').id;
+  const modifiedCow = {
+    name: $('#edit-cow-name').val(),
+    breed: $('#edit-cow-breed').val(),
+    location: $('#edit-cow-location').val(),
+    weight: $('#edit-cow-weight').val() * 1,
+  };
+  cowData.updateCow(cowId, modifiedCow)
+    .then(() => {
+      // reprint cows
+      // eslint-disable-next-line no-use-before-define
+      buildCows();
+      util.printToDom('edit-cow', '');
+    })
+    .catch((err) => console.error(err));
 };
 
 const farmerCowController = (e) => {
@@ -86,7 +112,9 @@ const buildCows = () => {
 
 const pastureEvents = () => {
   $('body').on('click', '.delete-cow', removeCow);
+  $('body').on('click', '.edit-cow', editCowEvent);
   $('body').on('click', '#cow-creator', makeACow);
+  $('body').on('click', '#cow-modifier', modifyCow);
   $('body').on('click', '.farmer-cow-checkbox', farmerCowController);
 };
 
